@@ -6550,7 +6550,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "220"
 			(at 0 -1.1 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -6861,7 +6861,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "220"
 			(at 0 -1.1 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -6990,7 +6990,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "220"
 			(at 0 -1.1 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -7119,7 +7119,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "220"
 			(at 0 -1.1 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -7639,7 +7639,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "220"
 			(at 0 -1.1 -90)
 			(unlocked yes)
 			(layer "B.Fab")
