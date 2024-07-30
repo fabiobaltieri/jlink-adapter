@@ -1,0 +1,5 @@
+board:
+  name: jlink_adapter
+  vendor: balto
+  socs:
+    - name: stm32c011xx
