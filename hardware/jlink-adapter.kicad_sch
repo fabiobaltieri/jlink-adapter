@@ -5626,6 +5626,16 @@
 		)
 		(uuid "c86dacbf-9677-40ce-8350-25a292010353")
 	)
+	(text "TODO: diodes"
+		(exclude_from_sim no)
+		(at 25.4 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "cda82b94-ef5a-4208-a0f8-5c801329d4be")
+	)
 	(text "3.3V LDO (system)"
 		(exclude_from_sim no)
 		(at 97.79 20.32 0)
@@ -5691,6 +5701,16 @@
 			(justify left bottom)
 		)
 		(uuid "ddc1da1e-2662-4acd-bb27-562d3020e163")
+	)
+	(text "TODO: diodes"
+		(exclude_from_sim no)
+		(at 26.67 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f027cbca-8d52-4f9a-b7ee-bbfe323cbf24")
 	)
 	(label "AIN_VCC"
 		(at 102.87 88.9 180)
