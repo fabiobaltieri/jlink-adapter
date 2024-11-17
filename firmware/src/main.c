@@ -10,18 +10,16 @@
 #define VOUT_NODE DT_NODELABEL(vout)
 static const struct adc_dt_spec vout = ADC_DT_SPEC_GET(VOUT_NODE);
 
-#define LED_WARN_IDX DT_NODE_CHILD_IDX(DT_NODELABEL(led_warn))
-#define LED_1V8_IN DT_NODE_CHILD_IDX(DT_NODELABEL(led_1v8_in))
-#define LED_3V3_IN DT_NODE_CHILD_IDX(DT_NODELABEL(led_3v3_in))
-#define LED_1V8_OUT DT_NODE_CHILD_IDX(DT_NODELABEL(led_1v8_out))
-#define LED_3V3_OUT DT_NODE_CHILD_IDX(DT_NODELABEL(led_3v3_out))
+static const struct led_dt_spec led_warn = LED_DT_SPEC_GET(DT_NODELABEL(led_warn));
+static const struct led_dt_spec led_1v8_in = LED_DT_SPEC_GET(DT_NODELABEL(led_1v8_in));
+static const struct led_dt_spec led_3v3_in = LED_DT_SPEC_GET(DT_NODELABEL(led_3v3_in));
+static const struct led_dt_spec led_1v8_out = LED_DT_SPEC_GET(DT_NODELABEL(led_1v8_out));
+static const struct led_dt_spec led_3v3_out = LED_DT_SPEC_GET(DT_NODELABEL(led_3v3_out));
 
 #define LED_GREEN_ON_LEVEL 20
 #define LED_ON_LEVEL 60
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
-
-static const struct device *led_dev = DEVICE_DT_GET(DT_NODELABEL(leds));
 
 static uint32_t read_vout_mv(void)
 {
@@ -78,7 +76,7 @@ static void blink_input_cb(struct input_event *evt, void *user_data)
 	case INPUT_KEY_0:
 		LOG_INF("button 3v3");
 		if (status.en_3v3) {
-			led_set_brightness(led_dev, LED_3V3_OUT, 0);
+			led_set_brightness_dt(&led_3v3_out, 0);
 			regulator_disable(reg_3v3);
 			status.en_3v3 = false;
 			return;
@@ -90,14 +88,14 @@ static void blink_input_cb(struct input_event *evt, void *user_data)
 			return;
 		}
 
-		led_set_brightness(led_dev, LED_3V3_OUT, LED_ON_LEVEL);
+		led_set_brightness_dt(&led_3v3_out, LED_ON_LEVEL);
 		regulator_enable(reg_3v3);
 		status.en_3v3 = true;
 		return;
 	case INPUT_KEY_1:
 		LOG_INF("button 1v8");
 		if (status.en_1v8) {
-			led_set_brightness(led_dev, LED_1V8_OUT, 0);
+			led_set_brightness_dt(&led_1v8_out, 0);
 			regulator_disable(reg_1v8);
 			status.en_1v8 = false;
 			return;
@@ -109,7 +107,7 @@ static void blink_input_cb(struct input_event *evt, void *user_data)
 			return;
 		}
 
-		led_set_brightness(led_dev, LED_1V8_OUT, LED_ON_LEVEL);
+		led_set_brightness_dt(&led_1v8_out, LED_ON_LEVEL);
 		regulator_enable(reg_1v8);
 		status.en_1v8 = true;
 		return;
@@ -129,9 +127,9 @@ int main(void)
 		vout_mv = read_vout_mv();
 
 		if (vout_mv < 100) {
-			led_set_brightness(led_dev, LED_WARN_IDX, LED_ON_LEVEL);
-			led_set_brightness(led_dev, LED_1V8_IN, 0);
-			led_set_brightness(led_dev, LED_3V3_IN, 0);
+			led_set_brightness_dt(&led_warn, LED_ON_LEVEL);
+			led_set_brightness_dt(&led_1v8_in, 0);
+			led_set_brightness_dt(&led_3v3_in, 0);
 			status.locked = false;
 			goto out;
 		}
@@ -145,17 +143,17 @@ int main(void)
 		}
 
 		if (IN_RANGE(vout_mv, 1700, 1900)) {
-			led_set_brightness(led_dev, LED_WARN_IDX, 0);
-			led_set_brightness(led_dev, LED_1V8_IN, on_level);
-			led_set_brightness(led_dev, LED_3V3_IN, 0);
+			led_set_brightness_dt(&led_warn, 0);
+			led_set_brightness_dt(&led_1v8_in, on_level);
+			led_set_brightness_dt(&led_3v3_in, 0);
 		} else if (IN_RANGE(vout_mv, 3200, 3400)) {
-			led_set_brightness(led_dev, LED_WARN_IDX, 0);
-			led_set_brightness(led_dev, LED_1V8_IN, 0);
-			led_set_brightness(led_dev, LED_3V3_IN, on_level);
+			led_set_brightness_dt(&led_warn, 0);
+			led_set_brightness_dt(&led_1v8_in, 0);
+			led_set_brightness_dt(&led_3v3_in, on_level);
 		} else {
-			led_set_brightness(led_dev, LED_WARN_IDX, status.blink ? LED_ON_LEVEL : 0);
-			led_set_brightness(led_dev, LED_1V8_IN, 0);
-			led_set_brightness(led_dev, LED_3V3_IN, 0);
+			led_set_brightness_dt(&led_warn, status.blink ? LED_ON_LEVEL : 0);
+			led_set_brightness_dt(&led_1v8_in, 0);
+			led_set_brightness_dt(&led_3v3_in, 0);
 		}
 out:
 		status.blink = !status.blink;
