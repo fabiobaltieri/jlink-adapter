@@ -126,7 +126,7 @@ int main(void)
 	while (1) {
 		vout_mv = read_vout_mv();
 
-		if (vout_mv < 100) {
+		if (vout_mv < 150) {
 			led_set_brightness_dt(&led_warn, LED_ON_LEVEL);
 			led_set_brightness_dt(&led_1v8_in, 0);
 			led_set_brightness_dt(&led_3v3_in, 0);
