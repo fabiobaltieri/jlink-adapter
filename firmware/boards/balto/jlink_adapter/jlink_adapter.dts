@@ -121,7 +121,7 @@
 };
 
 &adc1 {
-	st,adc-clock-source = <SYNC>;
+	st,adc-clock-source = "SYNC";
 	st,adc-prescaler = <2>;
 	status = "okay";
 
